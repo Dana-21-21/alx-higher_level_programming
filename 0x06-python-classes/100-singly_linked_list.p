@@ -39,4 +39,33 @@ class Node:
 
 class SinglyLinkedList:
     """A class that creates a Singly Linked List.
+    """
+    def __init__(self):
+        self.__head = None
 
+    def __repr__(self):
+        temp = self.__head
+        total = ""
+        while temp:
+            total += "{:d}".format(temp.data)
+            temp = temp.next_node
+            if temp:
+                total += "\n"
+        return total
+
+    def sorted_insert(self, value):
+        if self.__head is None:
+            self.__head = Node(value)
+        else:
+            curr = self.__head
+            prev = None
+            while curr and value > curr.data:
+                prev = curr
+                curr = curr.next_node
+            if curr is None:
+                prev.next_node = Node(value)
+            elif curr is self.__head and prev is None:
+                self.__head = Node(value, curr)
+            else:
+                newNode = Node(value, curr)
+                prev.next_node = newNode
